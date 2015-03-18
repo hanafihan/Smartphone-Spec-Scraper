@@ -40,7 +40,7 @@ class GSMAParser {
                 
                 
 				// Only do Samsung for now, to speed things up
-				if (stristr($b['name'],'sam')) {
+				if (stristr($b['name'],'vivo')) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				}
