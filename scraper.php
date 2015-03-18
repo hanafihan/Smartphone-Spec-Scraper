@@ -17,8 +17,8 @@ class GSMAParser {
         $this->parseBrands();
         echo count( $this->brands) . ' parsed brands'. "\n";
         
-        $this->parseModels();
-        echo $this->models . ' parsed models'. "\n";
+        //$this->parseModels();
+        //echo $this->models . ' parsed models'. "\n";
     }
 
     function parseBrands(){
@@ -39,7 +39,7 @@ class GSMAParser {
                 
                 $this->brands[] = $b;
                 
-                scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "test");
+                //scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "test");
 
             }           
         
