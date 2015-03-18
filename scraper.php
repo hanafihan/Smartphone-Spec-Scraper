@@ -42,7 +42,7 @@ class GSMAParser {
                 
 				//If you want to test stuff, it's best to do it with a limited set. Vivo only has 10 or so devices.
 				
-				if (stristr("htc samsung lg amazon asus",$b['name'])) {
+				if (stristr("htc samsung lg amazon asus apple",$b['name'])) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				//}
