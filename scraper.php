@@ -59,7 +59,8 @@ class GSMAParser {
         foreach ($this->brands as $b) {
             
             $this->parseModelsPage($b['id'],$b['name'],$b['link']);
-            
+			echo $b['name'];
+
         }
 
     }
@@ -68,7 +69,7 @@ class GSMAParser {
 
         $html_content = scraperwiki::scrape($page);
         $this->html = str_get_html($html_content);
-		
+		$count = 0;
         foreach ($this->html->find("div.makers a") as $el) {
             $img = $el->find('img',0);
             $m['name'] = $brandName . ' ' . $el->find('strong',0)->innertext;
@@ -79,7 +80,16 @@ class GSMAParser {
             $m['id'] = (int) substr($temp[1], 0, -4);
             $m['brand_id'] = $brandId;
 
-			echo '.';
+			$count++;
+			if($count == 10)
+			{
+				echo '|';
+				$count = 0;
+			}
+			else
+			{
+				echo '.';
+			}
 			
 	        $html_content_single = scraperwiki::scrape($m['link']);
 			$html_content_single_html = str_get_html($html_content_single);
@@ -114,6 +124,9 @@ class GSMAParser {
             scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
 
             $this->models++;
+			
+			echo "\n";
+
         }
 
         $pagination = $this->html->find("div.nav-pages",0);
