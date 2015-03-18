@@ -68,7 +68,7 @@ class GSMAParser {
 
         $html_content = scraperwiki::scrape($page);
         $this->html = str_get_html($html_content);
-
+		
         foreach ($this->html->find("div.makers a") as $el) {
             $img = $el->find('img',0);
             $m['name'] = $brandName . ' ' . $el->find('strong',0)->innertext;
@@ -88,6 +88,7 @@ class GSMAParser {
 				}
 			}
 			
+			echo 'adding ' + $m['name'];
 			
             scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
 
