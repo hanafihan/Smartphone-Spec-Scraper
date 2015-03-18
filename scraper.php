@@ -38,11 +38,10 @@ class GSMAParser {
                 $temp = explode('-',$el->href);
                 $b['id'] = (int) substr($temp[2], 0, -4);
                 
-                $this->brands[] = $b;
                 
 				// Only do Samsung for now, to speed things up
 				if (stristr($b['name'],'sam')) {
-    			
+					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				}
             }           
@@ -86,10 +85,25 @@ class GSMAParser {
 			
 			//echo strtok($html_content_single_html,"\n") . "\n";
 			foreach ($html_content_single_html->find("div#specs-list tr") as $el_single) {
-				echo '-- tr: ' . $el_single->find('a',0) . "\n";
 				if(stristr($el_single->find('a',0),'stat'))	{
 					$m['status'] = $el_single->find('td',1);
 				}
+				
+				if(stristr($el_single->find('a',0),'sensor'))	{
+					$m['sensors'] = $el_single->find('td',1);
+				}
+				
+				if(stristr($el_single->find('a',0),'cpu'))	{
+					$m['cpu'] = $el_single->find('td',1);
+				}
+				
+				if(stristr($el_single->find('a',0),'gpu'))	{
+					$m['gpu'] = $el_single->find('td',1);
+				}
+				if(stristr($el_single->find('a',0),'resol'))	{
+					$m['res'] = $el_single->find('td',1);
+				}
+				
 			}
 			
 			
