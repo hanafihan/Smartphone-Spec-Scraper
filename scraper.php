@@ -86,24 +86,24 @@ class GSMAParser {
 			//echo strtok($html_content_single_html,"\n") . "\n";
 			foreach ($html_content_single_html->find("div#specs-list tr") as $el_single) {
 				if(stristr($el_single->find('a',0),'stat'))	{
-					echo '+ adding ' . $el_single->find('td',1);
+					echo '+ adding ' . $el_single->find('td',1)->innertext;
 
-					$m['statuss'] = $el_single->find('td',1);
+					$m['statuss'] = $el_single->find('td',1)->innertext;
 				}
 				
 				if(stristr($el_single->find('a',0),'sensor'))	{
-					$m['sensors'] = $el_single->find('td',1);
+					$m['sensors'] = $el_single->find('td',1)->innertext;
 				}
 				
 				if(stristr($el_single->find('a',0),'cpu'))	{
-					$m['cpu'] = $el_single->find('td',1);
+					$m['cpu'] = $el_single->find('td',1)->innertext;
 				}
 				
 				if(stristr($el_single->find('a',0),'gpu'))	{
-					$m['gpu'] = $el_single->find('td',1);
+					$m['gpu'] = $el_single->find('td',1)->innertext;
 				}
 				if(stristr($el_single->find('a',0),'resol'))	{
-					$m['res'] = $el_single->find('td',1);
+					$m['res'] = $el_single->find('td',1)->innertext;
 				}
 				
 			}
