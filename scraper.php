@@ -82,7 +82,8 @@ class GSMAParser {
             $m['link'] = 'http://www.gsmarena.com/'.$el->href;
             $m['desc'] = $img->title;
             $temp = explode('-',$el->href);
-            $m['id'] = (int) substr($temp[1], 0, -4);
+            //$m['id'] = (int) substr($temp[1], 0, -4);
+			$m['id'] = models;
             $m['brand_id'] = $brandId;
 
 			$count++;
@@ -93,7 +94,7 @@ class GSMAParser {
 			}
 			else
 			{
-				echo '.';
+				//echo '.';
 			}
 			
 	        $html_content_single = scraperwiki::scrape($m['link']);
@@ -101,8 +102,12 @@ class GSMAParser {
 			
 			//echo strtok($html_content_single_html,"\n") . "\n";
 			foreach ($html_content_single_html->find("div#specs-list tr") as $el_single) {
+				if(stristr($el_single->find('a',0),'announ'))	{
+					$m['announced'] = $el_single->find('td',1)->innertext;
+				}
+
 				if(stristr($el_single->find('a',0),'stat'))	{
-					$m['statuss'] = $el_single->find('td',1)->innertext;
+					$m['status'] = $el_single->find('td',1)->innertext;
 				}
 				
 				if(stristr($el_single->find('a',0),'sensor'))	{
