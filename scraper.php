@@ -130,6 +130,8 @@ class GSMAParser {
 				}
 			}
 			
+			$html_content_single_html->__destruct();
+			
             scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
 
             $this->models++;
