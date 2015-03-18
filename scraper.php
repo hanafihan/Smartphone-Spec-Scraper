@@ -79,12 +79,12 @@ class GSMAParser {
             $m['id'] = (int) substr($temp[1], 0, -4);
             $m['brand_id'] = $brandId;
 
-			echo 'adding ' + $m['name'];
+			echo 'adding ' . $m['name'];
 			
 	        $html_content_single = scraperwiki::scrape($m['link']);
 			$html_content_single_html = str_get_html($html_content_single);
 			foreach ($this->html->find("div.specs-list tr") as $el_single) {
-				echo '-- tr: ' + $el_single->find('a',0);
+				echo '-- tr: ' . $el_single->find('a',0);
 				if(stristr($el_single->find('a',0),'stat'))	{
 					$m['status'] = $el_single->find('td',1);
 				}
