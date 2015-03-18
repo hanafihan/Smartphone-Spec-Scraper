@@ -45,7 +45,7 @@ class GSMAParser {
 				if (stristr("htc samsung lg amazon asus apple",$b['name'])) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
-				//}
+				}
 				
 				$lastb = $b;
             }          
