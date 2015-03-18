@@ -10,6 +10,7 @@ class GSMAParser {
     var $html;
 
     function init() {
+	
         $this->brands = array();
         $this->models = 0;        
 
@@ -39,8 +40,11 @@ class GSMAParser {
                 
                 $this->brands[] = $b;
                 
-                scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "data");
-
+				// Only do Samsung for now, to speed things up
+				if (stristr($b['name'],'sam')) {
+    			
+					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
+				}
             }           
         
             $i++;
@@ -75,9 +79,6 @@ class GSMAParser {
             $m['id'] = (int) substr($temp[1], 0, -4);
             $m['brand_id'] = $brandId;
 
-            scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
-
-            $this->models++;
 
 	        $html_content_single = scraperwiki::scrape($m['link']);
 			$html_content_single_html = str_get_html($html_content_single);
@@ -86,6 +87,11 @@ class GSMAParser {
 					$m['status'] = $el_single->find('td',1);
 				}
 			}
+			
+			
+            scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
+
+            $this->models++;
         }
 
         $pagination = $this->html->find("div.nav-pages",0);
