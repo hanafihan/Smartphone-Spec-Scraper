@@ -83,7 +83,7 @@ class GSMAParser {
 			
 	        $html_content_single = scraperwiki::scrape($m['link']);
 			$html_content_single_html = str_get_html($html_content_single);
-			foreach ($this->html->find("div.specs-list tr") as $el_single) {
+			foreach ($html_content_single_html->find("div.specs-list tr") as $el_single) {
 				echo '-- tr: ' . $el_single->find('a',0) . "\n";
 				if(stristr($el_single->find('a',0),'stat'))	{
 					$m['status'] = $el_single->find('td',1);
