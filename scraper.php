@@ -35,6 +35,7 @@ class GSMAParser {
                 $b['link'] = 'http://www.gsmarena.com/'.$el->href;
                 $b['img'] = $img->src;
                 $b['name'] = $img->alt;
+				$b['count'] = "(" + stristr($img,"(");
                 $temp = explode('-',$el->href);
                 $b['id'] = (int) substr($temp[2], 0, -4);
                 
@@ -57,7 +58,7 @@ class GSMAParser {
     function parseModels(){
         $temp = array();
         foreach ($this->brands as $b) {
-			echo $b['name'];            
+			echo $b['name'] . " " . $b['count'];            
             $this->parseModelsPage($b['id'],$b['name'],$b['link']);
 
         }
