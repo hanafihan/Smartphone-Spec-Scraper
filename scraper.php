@@ -57,9 +57,8 @@ class GSMAParser {
     function parseModels(){
         $temp = array();
         foreach ($this->brands as $b) {
-            
+			echo $b['name'];            
             $this->parseModelsPage($b['id'],$b['name'],$b['link']);
-			echo $b['name'];
 
         }
 
