@@ -37,8 +37,8 @@ class GSMAParser {
                 $b['img'] = $img->src;
                 $b['name'] = $img->alt;
                 $temp = explode('-',$el->href);
-                $b['id'] = (int) substr($temp[2], 0, -4);
-                
+                //$b['id'] = (int) substr($temp[2], 0, -4);
+                $b['id'] = $i;
                 
 				//If you want to test stuff, it's best to do it with a limited set. Vivo only has 10 or so devices.
 				
