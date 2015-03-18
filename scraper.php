@@ -35,7 +35,7 @@ class GSMAParser {
                 $b['link'] = 'http://www.gsmarena.com/'.$el->href;
                 $b['img'] = $img->src;
                 $b['name'] = $img->alt;
-				$b['count'] = "(" + stristr($img,"(");
+				$b['count'] = "(" . stristr($img,"(");
                 $temp = explode('-',$el->href);
                 $b['id'] = (int) substr($temp[2], 0, -4);
                 
