@@ -129,10 +129,12 @@ class GSMAParser {
 
             $this->models++;
 			
-			echo "\n";
+			
 
         }
 
+		echo "\n";
+		
         $pagination = $this->html->find("div.nav-pages",0);
 
         if($pagination){
