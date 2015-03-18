@@ -1,4 +1,4 @@
-# cellphones-directory
+# Smartphone Spec Scraper
 Smartphone Spec Scraper Script
 
 It's based on Palamago's 'cellphones-directory'.
