@@ -28,6 +28,7 @@ class GSMAParser {
     
         $i = 0;
         $temp = array();
+		$lastb;
         foreach ($html->find("div.st-text a") as $el) {
             
             if($i % 2 == 0){
@@ -35,7 +36,6 @@ class GSMAParser {
                 $b['link'] = 'http://www.gsmarena.com/'.$el->href;
                 $b['img'] = $img->src;
                 $b['name'] = $img->alt;
-				$b['count'] = "(" . stristr($img,"(");
                 $temp = explode('-',$el->href);
                 $b['id'] = (int) substr($temp[2], 0, -4);
                 
@@ -46,7 +46,9 @@ class GSMAParser {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				//}
-            }           
+				
+				$lastb = $b;
+            }          
         
             $i++;
  
@@ -58,7 +60,7 @@ class GSMAParser {
     function parseModels(){
         $temp = array();
         foreach ($this->brands as $b) {
-			echo $b['name'] . " " . $b['count'];            
+			echo $b['name'] ;            
             $this->parseModelsPage($b['id'],$b['name'],$b['link']);
 
         }
@@ -70,7 +72,10 @@ class GSMAParser {
         $html_content = scraperwiki::scrape($page);
         $this->html = str_get_html($html_content);
 		$count = 0;
-        foreach ($this->html->find("div.makers a") as $el) {
+		
+		$array_of_ass = $this->html->find("div.makers a");
+		echo " (" . sizeof($array_of_ass) . ") ";
+        foreach ($array_of_ass as $el) {
             $img = $el->find('img',0);
             $m['name'] = $brandName . ' ' . $el->find('strong',0)->innertext;
             $m['img'] = $img->src;
