@@ -42,7 +42,7 @@ class GSMAParser {
                 
 				//If you want to test stuff, it's best to do it with a limited set. Vivo only has 10 or so devices.
 				
-				if (stristr("htc samsung lg amazon asus apple",$b['name'])) {
+				if (stristr("htc samsung lg amazon asus apple motorola",$b['name'])) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				}
@@ -77,7 +77,8 @@ class GSMAParser {
 		echo " (" . sizeof($array_of_ass) . ") ";
         foreach ($array_of_ass as $el) {
             $img = $el->find('img',0);
-            $m['name'] = $brandName . ' ' . $el->find('strong',0)->innertext;
+			$m['brand'] = $brandName;
+            $m['name'] = $el->find('strong',0)->innertext;
             $m['img'] = $img->src;
             $m['link'] = 'http://www.gsmarena.com/'.$el->href;
             $m['desc'] = $img->title;
