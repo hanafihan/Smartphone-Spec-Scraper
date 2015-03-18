@@ -79,7 +79,7 @@ class GSMAParser {
             $m['id'] = (int) substr($temp[1], 0, -4);
             $m['brand_id'] = $brandId;
 
-			echo 'adding ' . $m['name']. "\n";
+			echo '.';
 			
 	        $html_content_single = scraperwiki::scrape($m['link']);
 			$html_content_single_html = str_get_html($html_content_single);
@@ -87,13 +87,16 @@ class GSMAParser {
 			//echo strtok($html_content_single_html,"\n") . "\n";
 			foreach ($html_content_single_html->find("div#specs-list tr") as $el_single) {
 				if(stristr($el_single->find('a',0),'stat'))	{
-					echo '+ adding ' . $el_single->find('td',1)->innertext;
-
 					$m['statuss'] = $el_single->find('td',1)->innertext;
 				}
 				
 				if(stristr($el_single->find('a',0),'sensor'))	{
-					$m['sensors'] = $el_single->find('td',1)->innertext;
+					$sensors = $el_single->find('td',1)->innertext;
+					$m['sensors'] = 1;
+					if(stristr($sensors,'accel'))	{$m['accel'] = 1} else {$m['accel'] = 0}
+					if(stristr($sensors,'gyro'))	{$m['gyro'] = 1} else {$m['gyro'] = 0}
+					if(stristr($sensors,'comp'))	{$m['comp'] = 1} else {$m['comp'] = 0}
+					if(stristr($sensors,'prox'))	{$m['prox'] = 1} else {$m['prox'] = 0}
 				}
 				
 				if(stristr($el_single->find('a',0),'cpu'))	{
