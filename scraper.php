@@ -10,7 +10,6 @@ class GSMAParser {
     var $html;
 
     function init() {
-	
         $this->brands = array();
         $this->models = 0;        
 
@@ -23,7 +22,8 @@ class GSMAParser {
     }
 
     function parseBrands(){
-        $html_content = scraperwiki::scrape("http://www.gsmarena.com/makers.php3");
+        		
+		$html_content = scraperwiki::scrape("http://www.gsmarena.com/makers.php3");
         $html = str_get_html($html_content);
     
         $i = 0;
@@ -42,7 +42,7 @@ class GSMAParser {
                 
 				//If you want to test stuff, it's best to do it with a limited set. Vivo only has 10 or so devices.
 				
-				//if (stristr($b['name'],'vivo')) {
+				if (stristr("htc samsung lg amazon asus",$b['name'])) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
 				//}
