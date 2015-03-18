@@ -83,7 +83,7 @@ class GSMAParser {
             $m['desc'] = $img->title;
             $temp = explode('-',$el->href);
             //$m['id'] = (int) substr($temp[1], 0, -4);
-			$m['id'] = models;
+			$m['id'] = $this->models;
             $m['brand_id'] = $brandId;
 
 			$count++;
