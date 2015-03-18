@@ -86,7 +86,7 @@ class GSMAParser {
 			//echo strtok($html_content_single_html,"\n") . "\n";
 			foreach ($html_content_single_html->find("div#specs-list tr") as $el_single) {
 				if(stristr($el_single->find('a',0),'stat'))	{
-					$m['status'] = $el_single->find('td',1);
+					$m['statuss'] = $el_single->find('td',1);
 				}
 				
 				if(stristr($el_single->find('a',0),'sensor'))	{
