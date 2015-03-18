@@ -39,11 +39,12 @@ class GSMAParser {
                 $b['id'] = (int) substr($temp[2], 0, -4);
                 
                 
-				// Only do Samsung for now, to speed things up
-				if (stristr($b['name'],'vivo')) {
+				//If you want to test stuff, it's best to do it with a limited set. Vivo only has 10 or so devices.
+				
+				//if (stristr($b['name'],'vivo')) {
 					$this->brands[] = $b;
 					scraperwiki::save_sqlite(array("id"=>$b['id']), $b, "brands");
-				}
+				//}
             }           
         
             $i++;
@@ -105,10 +106,7 @@ class GSMAParser {
 				if(stristr($el_single->find('a',0),'resol'))	{
 					$m['res'] = $el_single->find('td',1)->innertext;
 				}
-				
 			}
-			
-			
 			
             scraperwiki::save_sqlite(array("id"=>$m['id']), $m, "models");
 
